@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Registration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="navbar">
+            <h3>Student Portal</h3>
+            <form th:action="@{/logout}" method="post" style="display:inline">
+                <button type="submit" class="btn-small logout">Logout</button>
+            </form>
+        </nav>
+        <div class="content">
+            <h1>My Course Registration</h1>
+            <table class="user-table" th:if="${registration != null}">
+                <tr><th>Name</th><td th:text="${registration.studentName}"></td></tr>
+                <tr><th>Email</th><td th:text="${registration.email}"></td></tr>
+                <tr><th>Phone</th><td th:text="${registration.phone}"></td></tr>
+                <tr><th>Course</th><td th:text="${registration.course}"></td></tr>
+                <tr><th>Address</th><td th:text="${registration.address}"></td></tr>
+            </table>
+            <p th:if="${registration == null}">No registration found.</p>
+            <p style="margin-top:15px;color:#888;">
+                To make changes, please contact the administrator.
+            </p>
+        </div>
+    </div>
+</body>
+<script th:src="@{/js/animations.js}"></script>
+</html>

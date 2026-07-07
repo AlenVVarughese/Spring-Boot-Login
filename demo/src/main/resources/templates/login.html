@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Login to continue</p>
+
+            <p th:if="${param.error}" class="msg error">Invalid username or password</p>
+            <p th:if="${param.logout}" class="msg success">Logged out successfully</p>
+            <p th:if="${param.registered}" class="msg success">Registration successful. Please login.</p>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p class="switch">Don't have an account? <a th:href="@{/register}">Register</a></p>
+            <p class="switch"><a th:href="@{/forgot-password}">Forgot password?</a></p>
+        </div>
+    </div>
+</body>
+<script th:src="@{/js/animations.js}"></script>
+</html>

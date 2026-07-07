@@ -1,0 +1,193 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+/* Animated dynamic gradient background (single source of truth for body background) */
+body {
+    background: linear-gradient(-45deg, #667eea, #764ba2, #6a11cb, #2575fc);
+    background-size: 400% 400%;
+    animation: gradientFlow 12s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ---------- Layout containers ---------- */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.auth-card {
+    background: #fff;
+    padding: 40px 35px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 380px;
+    animation: floatIn 0.6s ease;
+}
+
+.auth-card h2 { color: #333; margin-bottom: 5px; }
+.subtitle { color: #888; margin-bottom: 25px; font-size: 14px; }
+
+/* ---------- Forms ---------- */
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; margin-bottom: 6px; font-size: 14px; color: #555; }
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus { border-color: #764ba2; box-shadow: 0 0 0 3px rgba(118,75,162,0.15); }
+
+/* ---------- Buttons ---------- */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn:active { transform: translateY(1px) scale(0.98); }
+
+.btn-small {
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #764ba2;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    margin-left: 8px;
+    display: inline-block;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.btn-small:active { transform: translateY(1px) scale(0.98); }
+.btn-small.logout { background: #e74c3c; }
+
+.switch { margin-top: 18px; text-align: center; font-size: 14px; color: #666; }
+.switch a { color: #764ba2; text-decoration: none; font-weight: 600; }
+
+/* ---------- Messages ---------- */
+.msg { padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 14px; text-align: center; }
+.msg.error { background: #fdecea; color: #c0392b; }
+.msg.success { background: #eafaf1; color: #27ae60; }
+
+/* ---------- Dashboard / navbar ---------- */
+.dashboard { min-height: 100vh; background: #f4f6f9; }
+
+.navbar {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    padding: 16px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.navbar h3 { color: #764ba2; }
+.user-tag { margin-right: 15px; font-weight: 600; color: #555; }
+
+.content { padding: 40px; }
+.content h1 { color: #333; margin-bottom: 10px; }
+
+/* ---------- Tables ---------- */
+.user-table {
+    width: 100%;
+    background: #fff;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.user-table th, .user-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+.user-table th { background: #764ba2; color: #fff; }
+
+/* ---------- 3D tilt card effect (mouse-tracked via animations.js) ---------- */
+.tilt-card {
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+.tilt-card:hover {
+    box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+}
+
+/* ---------- Floating entrance animation ---------- */
+.stat-card, .chart-card {
+    animation: floatIn 0.6s ease;
+}
+@keyframes floatIn {
+    from { opacity: 0; transform: translateY(25px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------- Stats row (dashboard) ---------- */
+.stats-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.stat-card {
+    background: linear-gradient(135deg, #ffffff, #f2f0fa);
+    padding: 25px 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    text-align: center;
+    flex: 1;
+    min-width: 180px;
+}
+.stat-card h2 {
+    font-size: 32px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: none; /* overrides the global shine animation below so numbers stay readable */
+}
+.stat-card p { color: #777; margin-top: 5px; font-size: 14px; }
+
+/* ---------- Chart card ---------- */
+.chart-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.chart-card h3 { margin-bottom: 15px; color: #444; }
+
+/* ---------- Glowing animated title text ---------- */
+h1, h2 {
+    background: linear-gradient(90deg, #764ba2, #667eea, #764ba2);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+}
+@keyframes shine {
+    to { background-position: 200% center; }
+}

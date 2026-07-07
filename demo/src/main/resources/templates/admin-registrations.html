@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Registrations</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="navbar">
+            <h3>Admin Panel</h3>
+            <div>
+                <a th:href="@{/admin/dashboard}" class="btn-small">Dashboard</a>
+                <a th:href="@{/admin/courses}" class="btn-small">Courses</a>
+                <a th:href="@{/admin/reset-requests}" class="btn-small">Reset Requests</a>
+                <form th:action="@{/logout}" method="post" style="display:inline">
+                    <button type="submit" class="btn-small logout">Logout</button>
+                </form>
+            </div>
+        </nav>
+        <div class="content">
+            <h1>All Course Registrations</h1>
+            <table class="user-table">
+                <tr>
+                    <th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+                    <th>Course</th><th>Address</th><th>Mail Sent</th><th>Actions</th>
+                </tr>
+                <tr th:each="r : ${registrations}">
+                    <td th:text="${r.id}"></td>
+                    <td th:text="${r.studentName}"></td>
+                    <td th:text="${r.email}"></td>
+                    <td th:text="${r.phone}"></td>
+                    <td th:text="${r.course}"></td>
+                    <td th:text="${r.address}"></td>
+                    <td>
+                        <span th:if="${r.mailSent}" style="color:#27ae60;font-weight:600;">✔ Sent</span>
+                        <span th:unless="${r.mailSent}" style="color:#e74c3c;font-weight:600;">✘ Failed</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/registrations/edit/{id}(id=${r.id})}" class="btn-small">Edit</a>
+                        <a th:href="@{/admin/registrations/delete/{id}(id=${r.id})}" class="btn-small logout"
+                           onclick="return confirm('Delete this registration?')">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script th:src="@{/js/animations.js}"></script>
+</body>
+</html>
